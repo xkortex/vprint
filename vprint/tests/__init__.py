@@ -17,7 +17,7 @@ def run_tests():
         >>> log_vprint_on = get_verbose_logger('vl2')
         >>> vprint = log_vprint_on.debug
         >>> vprint('foo')
-        'foo'
+        __init__.p~_tests:0>:1> foo
     """
     vprint('should not print unless VPRINTV is set before runtime')
     aprint('always print')

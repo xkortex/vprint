@@ -10,14 +10,25 @@ def get_version(pkg_name):
         ver = text.split('version = ')[1]
     except IndexError:
         raise RuntimeError('Could not parse version string: {}'.format(text))
-    return ver.strip('"').strip("'")
+    ver = ver.replace('\n', '').strip().strip('"').strip("'")
+    return ver
 
+
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.5",
+]
 
 pkg_name = 'vprint'
 setup(
     name='vprint',
     version=get_version('vprint'),
     description='Verbose Printing Utility',
+    author='Michael McDermott',
+    license='MIT',
     packages=find_packages(),
+    url='https://github.com/xkortex/vprint'
 
 )
