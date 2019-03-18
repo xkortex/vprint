@@ -1,3 +1,10 @@
+# IDE
+.idea
+.spyderproject
+.spyproject
+.vscode
+.ipynb_checkpoints
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -69,9 +76,6 @@ docs/_build/
 # PyBuilder
 target/
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
 # pyenv
 .python-version
 
@@ -89,10 +93,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
 
 # Rope project settings
 .ropeproject
