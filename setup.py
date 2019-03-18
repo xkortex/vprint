@@ -1,3 +1,4 @@
+import os
 from setuptools import find_packages, setup
 from distutils.util import convert_path
 
@@ -12,6 +13,11 @@ def get_version(pkg_name):
         raise RuntimeError('Could not parse version string: {}'.format(text))
     ver = ver.replace('\n', '').strip().strip('"').strip("'")
     return ver
+
+# The directory containing this file
+HERE = os.path.dirname(__file__)
+with open(os.path.join(HERE, 'README.md')) as fp:
+    README = fp.read()
 
 
 classifiers = [
@@ -28,6 +34,8 @@ setup(
     description='Verbose Printing Utility',
     author='Michael McDermott',
     license='MIT',
+    long_description=README,
+    long_description_content_type="text/markdown",
     packages=find_packages(),
     url='https://github.com/xkortex/vprint'
 
