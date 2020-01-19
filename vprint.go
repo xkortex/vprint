@@ -45,14 +45,23 @@ func Print(a ...interface{}) {
 	if settings.verbosity > 0 {
 		fmt.Fprint(os.Stderr, warningColor)
 		fmt.Fprint(os.Stderr, a...)
-		fmt.Fprint(os.Stderr, endLine)
+		fmt.Fprint(os.Stderr, endColor)
 	}
 }
 func Printf(format string, a ...interface{}) {
 	if settings.verbosity > 0 {
 		fmt.Fprint(os.Stderr, warningColor)
 		fmt.Fprintf(os.Stderr, format, a...)
-		fmt.Fprint(os.Stderr, endLine)
+		fmt.Fprint(os.Stderr, endColor)
 	}
 }
 
+func Red(a ...interface{}) string {
+	return fmt.Sprint(cRed) + fmt.Sprint(a) + fmt.Sprint(endColor)
+}
+func Green(a ...interface{}) string {
+	return fmt.Sprint(cGreen) + fmt.Sprint(a) + fmt.Sprint(endColor)
+}
+func Blue(a ...interface{}) string {
+	return fmt.Sprint(cBlue) + fmt.Sprint(a) + fmt.Sprint(endColor)
+}
