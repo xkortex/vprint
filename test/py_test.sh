@@ -42,6 +42,19 @@ if [[ -n $(VPRINTV=1 python -c "from vprint import vprint; vprint('yup')" 2>/dev
 fi
 
 
+if [[ -n $(VPRINTV=1 VPRINTV_FILE=stdout python -c "from vprint import vprint; vprint('nope')" 2>&1 1>/dev/null) ]]; then
+  errcho "7. Routed stdout, but saw output in stderr"
+  FAILED=1
+fi
+
+
+if [[ -z $(VPRINTV=1 VPRINTV_FILE=stdout python -c "from vprint import vprint; vprint('yup')"  ) ]]; then
+  errcho "8. Expected to see stout, did not see anything"
+  FAILED=1
+fi
+
+
+
 if [[ -n "$FAILED" ]]; then
   echo "Failed one or more tests"
   exit 1

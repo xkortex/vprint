@@ -9,6 +9,8 @@ Verbosity level as set by the environment variable, VPRINTV
 """
 VPRINT_KEYWORD = 'VPRINTV'
 
+class VprintException(Exception):
+    pass
 
 def get_vprint_level():
     # type: () -> int
@@ -43,4 +45,8 @@ def get_vprint_file():
     if vprint_target.lower() == ['stderr', '2', '&2']:
         return sys.stderr
 
-    return
+    # check that we can write out
+    with open(vprint_target, 'a') as fp:  # VPRINTV_FILE was set but permission denied
+        fp.write('')
+
+    return open(vprint_target, 'a')
