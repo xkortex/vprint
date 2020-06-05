@@ -4,7 +4,7 @@
 import logging
 import sys
 
-from vprint.vprint_level import get_vprint_level
+from vprint.vprint_level import get_vprint_level, get_vprint_file
 from vprint.formatting import PathTruncatingFormatter
 
 
@@ -19,6 +19,7 @@ def get_verbose_logger(name='verbose_logger', verbose=False,
         name: logger name
         verbose: If true, ignore the env variable and generate a logger
             which always prints
+        max_name_len: Trim the file name on output to this length
         fmt: formatting string. see logging.Formatter
         datefmt: date format string. see logging.Formatter
 
@@ -38,7 +39,8 @@ def get_verbose_logger(name='verbose_logger', verbose=False,
     # todo: add existing logger check
     logger = logging.getLogger(name)
     logger.setLevel(loglevel)
-    console_handler = logging.StreamHandler(sys.stdout)
+    outfile = get_vprint_file()
+    console_handler = logging.StreamHandler(outfile)
     console_handler.setLevel(loglevel)
     console_handler.setFormatter(vp_log_format)
     logger.addHandler(console_handler)

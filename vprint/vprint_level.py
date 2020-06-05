@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import sys
 
 """
 Verbosity level as set by the environment variable, VPRINTV
@@ -26,3 +27,20 @@ def get_vprint_level():
 
     return vprint_level
 
+
+def get_vprint_file():
+    """
+    Get the target of vprint(). Default is stderr
+    Returns:
+        writeable interface
+    """
+    vprint_target = os.environ.get(VPRINT_KEYWORD+'_FILE', None)
+    if vprint_target is None:
+        return sys.stderr
+
+    if vprint_target.lower() in ['stdout', '1', '&1']:
+        return sys.stdout
+    if vprint_target.lower() == ['stderr', '2', '&2']:
+        return sys.stderr
+
+    return

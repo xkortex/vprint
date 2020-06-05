@@ -1,0 +1,20 @@
+language: python
+
+stages:
+  - test
+
+matrix:
+  include:
+    - language: python
+      python:
+        - "2.7"
+        - "3.5"
+        - "3.6"
+        - "3.7"
+        - "3.8"
+        - "nightly"
+      install:
+        - pip install .
+      script:
+        - ./test/py_test.sh
+
