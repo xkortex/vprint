@@ -42,6 +42,36 @@ if [[ -n $(VPRINTV=1 python -c "from vprint import vprint; vprint('yup')" 2>/dev
 fi
 
 
+if [[ -n $(VPRINTV=1 VPRINTV_FILE=stdout python -c "from vprint import vprint; vprint('nope')" 2>&1 1>/dev/null) ]]; then
+  errcho "7. Routed stdout, but saw output in stderr"
+  FAILED=1
+fi
+
+
+if [[ -z $(VPRINTV=1 VPRINTV_FILE=stdout python -c "from vprint import vprint; vprint('yup')"  ) ]]; then
+  errcho "8. Expected to see stout, did not see anything"
+  FAILED=1
+fi
+
+
+TMPOUT=$(VPRINTV=1 VPRINTV_FILE=/tmp/vprinttest.log python -c "from vprint import vprint; vprint('to file')" 2>&1)
+if [[ $? -ne 0 ]]; then
+  errcho "9a. Routed to file, but process exited with error"
+fi
+if [[ -n "${TMPOUT}" ]]; then
+  errcho "9b. Routed to file, but saw output in stdout/err"
+  FAILED=1
+fi
+
+if [[ -z "$(cat /tmp/vprinttest.log)" ]]; then
+  errcho "9c. Routed to file, but file was empty"
+  FAILED=1
+fi
+
+rm -rf /tmp/vprinttest.log
+
+
+
 if [[ -n "$FAILED" ]]; then
   echo "Failed one or more tests"
   exit 1

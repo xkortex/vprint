@@ -18,12 +18,9 @@ FROM base_python
 
 WORKDIR /src/
 
-COPY test-require.txt ./
 
-RUN pip install --no-cache-dir -r /src/test-require.txt
+COPY . /src/vprint
 
-COPY . /src/numpy2json
+RUN pip install --no-cache-dir "/src/vprint/"
 
-RUN pip install --no-cache-dir "/src/numpy2json/[all]"
-
-WORKDIR /src/numpy2json
+WORKDIR /src/vprint
